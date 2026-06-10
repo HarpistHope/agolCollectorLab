@@ -50,6 +50,34 @@
             background-color: #005a87;
         }
 
+        /* Overriding default arcgis expand widget dimensions so the search widget does not cover the entire viewport on mobile devices */
+        .esri-ui .esri-expand__content--expanded {
+            max-width: 300px !important; 
+            width: 300px !important;
+        }
+
+        /* Prevent the widget content container from stretching full-screen vertically on mobile layouts */
+        .esri-ui .esri-expand__content {
+            max-width: 300px !important;
+            width: 300px !important;
+            height: auto !important; 
+            max-height: 450px !important; 
+        }
+
+        /* Force ArcGIS mobile card-and-panel wrapper to respect floating panel dimensions instead of full screen takeover */
+        .esri-ui-corner-container--card-and-panel .esri-expand__content--expanded {
+            top: 0 !important;
+            left: 0 !important;
+            right: auto !important;
+            bottom: auto !important;
+            position: absolute !important;
+        }
+
+        /* limit the height of the suggested addresses dropdown list inside constrained container */
+        .esri-search__suggestions-menu {
+            max-height: 250px !important; 
+        }
+
     </style>
 
   </head>
@@ -122,12 +150,7 @@
             // Create featurelayer from feature service (url from survey results)
             const layer = new FeatureLayer({ 
                 // URL to the service 
-                url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/survey123_0895af8eb5ca41d7bd0b3e720e6902bb_results/FeatureServer",
-                // adding in a popup template to display the survey results
-                popupTemplate: {
-                    title: "Survey Results",
-                    content: "{*}" // including all the feature attributes
-                }
+                url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/survey123_0895af8eb5ca41d7bd0b3e720e6902bb_results/FeatureServer"
             });
 
             // add layer to the map
