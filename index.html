@@ -18,6 +18,28 @@
             height: 100%;
             width: 100%;
         }
+
+        /* adding css for survey button */
+
+        .addRecordBtn {
+            position: absolute;
+            z-index: 10;
+            top: 10px;
+            right: 10px;
+            background-color: #0079c1;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .addRecordBtn:hover {
+            background-color: #005a87;
+        }
+
     </style>
 
     <!-- importing css and libraries for esri.js  -->
@@ -26,6 +48,9 @@
 
   </head>
   <body>
+
+    <!-- add the survey button -->
+     <a href="https://arcg.is/1Kr9HG5" target="_blank" class="addRecordBtn">Add Record</a>
 
     <!-- call the div 'viewDiv' -->
      <div id="viewDiv"></div>
@@ -38,8 +63,9 @@
             "esri/views/MapView", 
             "esri/widgets/Locate",
             "esri/widgets/Search",
-            "esri/layers/FeatureLayer"
-        ], (esriConfig, Map, MapView, Locate, Search, FeatureLayer) => {
+            "esri/layers/FeatureLayer",
+            "esri/widgets/Expand"
+        ], (esriConfig, Map, MapView, Locate, Search, FeatureLayer, Expand) => {
            
             // add API key (I am using the key set up in previous labs)
             esriConfig.apiKey = "AAPTaZ2rQpZ3e_kAjLMbAoRHR0g.._fqqp4bDNHHZdzTSsp9AO-QkJHtKqpaj-7Xv25F1YGAftgihPfF0YtKx3TlgjV1fIfgz5d5KD1tO1WludBUUE8UK14qZyasG6wdcyVgej-0RvTJlT6Cqr8NSnHJs2CR-QKtZ6cx1a-DlDQQytvHfcbHYyH2--XMqzLkkWez9t3HIMhqczJVoVTeXmERX-Sc_6OCF9zTuUnAuesDvugrzl5GUAN3LGTz2Zteo1pZkcrVPu2RRO94cFDhn8pvWIVGFeUSd7-icAT1_FDhHahp4";
@@ -68,15 +94,22 @@
                 index: 2
             });
 
-             // Challenge 2: add address search bar
+             // Challenge 2: add address search bar 
             // create search widget
             const searchWidget = new Search({
-            view: view,
-            placeholder: "Search Address" // added custom placeholder text within the Search widget
+                view: view,
+                placeholder: "Find a Coffee Shop (or anywhere else)" // adding custom placeholder text to the search widget
             });
 
-            // Add search widget in top left corner of the view, above other widgets
-            view.ui.add(searchWidget, {
+            // because the Add Record button takes up a lot of space, I placed the search widget within an expand widget
+            const searchExpand = new Expand({
+                view: view,
+                content: searchWidget,
+                expandIcon: "search" 
+            })
+
+            // Add search widget within expand widgetin top left corner of the view, above other widgets
+            view.ui.add(searchExpand, {
             position: "top-left",
             index: 0
             });
