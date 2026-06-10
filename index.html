@@ -115,8 +115,12 @@
             // create search widget
             const searchWidget = new Search({
                 view: view,
-                allPlaceholder: "Find a Coffee Shop (or anywhere else)", 
-                placeholder: "Find a Coffee Shop (or anywhere else)" // adding custom placeholder text to the search widget
+                includeDefaultSources: true,
+                // Change the placeholder text inside the input box
+                placeholder: "Find a Coffee Shop (or any address)",
+                
+                // You can customize the source properties to change behavior
+                allPlaceholder: "Find a Coffee Shop (or any address)"
             });
 
             // because the Add Record button takes up a lot of space, I placed the search widget within an expand widget
@@ -127,7 +131,7 @@
             });
 
             // Add search widget within expand widgetin top left corner of the view, above other widgets
-            view.ui.add(searchWidget, {
+            view.ui.add(searchExpand, {
             position: "top-left",
             index: 0
             });
