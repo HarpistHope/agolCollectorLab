@@ -122,7 +122,12 @@
             // Create featurelayer from feature service (url from survey results)
             const layer = new FeatureLayer({ 
                 // URL to the service 
-                url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/survey123_0895af8eb5ca41d7bd0b3e720e6902bb_results/FeatureServer"
+                url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/survey123_0895af8eb5ca41d7bd0b3e720e6902bb_results/FeatureServer",
+                // adding in a popup template to display the survey results
+                popupTemplate: {
+                    title: "Survey Results",
+                    content: "{*}" // including all the feature attributes
+                }
             });
 
             // add layer to the map
