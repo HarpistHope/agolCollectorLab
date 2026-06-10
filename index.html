@@ -8,7 +8,7 @@
 
     <title>Data Collector for AGOL</title>
 
-    <!-- importing css and libraries for esri.js -- I moved these above my custom style so the !important call is not overwriten by the arcgis css library -->
+    <!-- importing css and libraries for esri.js -- I moved these above my custom style so the arcgis style does not overwrite my own styles -->
     <link rel="stylesheet" href="https://js.arcgis.com/4.26/esri/themes/light/main.css" />
     <script src="https://js.arcgis.com/4.26/"></script>
 
@@ -48,34 +48,6 @@
 
         .addRecordBtn:hover {
             background-color: #005a87;
-        }
-
-        /* Gemini walked me through how to overwrite the default arcgis expand widget dimensions so the search widget does not cover the entire viewport when expanded */
-        .esri-ui .esri-expand__content--expanded {
-            max-width: 300px !important; 
-            width: 300px !important;
-        }
-
-        /* Prevent the widget content container from stretching full-screen on mobile */
-        .esri-ui .esri-expand__content {
-            max-width: 300px !important;
-            width: 300px !important;
-            height: auto !important; /* Prevented from forcing 100% height */
-            max-height: 450px !important; /* Gives a reasonable height limit on small screens */
-        }
-
-        /* Target the specific ArcGIS mobile panel layout class to force it to behave */
-        .esri-ui-corner-container--card-and-panel .esri-expand__content--expanded {
-            top: 0 !important;
-            left: 0 !important;
-            right: auto !important;
-            bottom: auto !important;
-            position: absolute !important;
-        }
-
-        /* limit the height of the suggested addresses dropdown list */
-        .esri-search__suggestions-menu {
-            max-height: 250px !important; 
         }
 
     </style>
