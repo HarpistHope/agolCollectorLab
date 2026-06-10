@@ -8,6 +8,10 @@
 
     <title>Data Collector for AGOL</title>
 
+    <!-- importing css and libraries for esri.js -- I moved these above my custom style so the !important call is not overwriten by the arcgis css library -->
+    <link rel="stylesheet" href="https://js.arcgis.com/4.26/esri/themes/light/main.css" />
+    <script src="https://js.arcgis.com/4.26/"></script>
+
     <!-- define css style -->
     <style>
         html,
@@ -58,10 +62,6 @@
         }
 
     </style>
-
-    <!-- importing css and libraries for esri.js  -->
-    <link rel="stylesheet" href="https://js.arcgis.com/4.26/esri/themes/light/main.css" />
-    <script src="https://js.arcgis.com/4.26/"></script>
 
   </head>
   <body>
@@ -115,11 +115,9 @@
             // create search widget
             const searchWidget = new Search({
                 view: view,
-                includeDefaultSources: true,
-                // Change the placeholder text inside the input box
+                includeDefaultSources: true, 
+                // Using placeholder and allPlaceholder to change the default text inside the input box (the same text regardless of search source)
                 placeholder: "Find a Coffee Shop (or any address)",
-                
-                // You can customize the source properties to change behavior
                 allPlaceholder: "Find a Coffee Shop (or any address)"
             });
 
