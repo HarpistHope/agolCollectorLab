@@ -50,15 +50,32 @@
             background-color: #005a87;
         }
 
-        /* Using css to limit the search widget so it does not take up the entire screen when expanded*/
+        /* Gemini walked me through how to overwrite the default arcgis expand widget dimensions so the search widget does not cover the entire viewport when expanded */
         .esri-ui .esri-expand__content--expanded {
-            max-width: 300px !important; /* I use !important to override any default css rules */
+            max-width: 300px !important; 
             width: 300px !important;
+        }
+
+        /* Prevent the widget content container from stretching full-screen on mobile */
+        .esri-ui .esri-expand__content {
+            max-width: 300px !important;
+            width: 300px !important;
+            height: auto !important; /* Prevented from forcing 100% height */
+            max-height: 450px !important; /* Gives a reasonable height limit on small screens */
+        }
+
+        /* Target the specific ArcGIS mobile panel layout class to force it to behave */
+        .esri-ui-corner-container--card-and-panel .esri-expand__content--expanded {
+            top: 0 !important;
+            left: 0 !important;
+            right: auto !important;
+            bottom: auto !important;
+            position: absolute !important;
         }
 
         /* limit the height of the suggested addresses dropdown list */
         .esri-search__suggestions-menu {
-            max-height: 400px !important; 
+            max-height: 250px !important; 
         }
 
     </style>
@@ -115,17 +132,6 @@
             // create search widget
             const searchWidget = new Search({
                 view: view
-            });
-
-            // Google Gemini helped me with the following block to overwrite the placeholder text in the search widget (I initially tried using placeholder: "" within the const searchWidget block but it did not work, likely because the default source's own placeholder overwrote mine when the widget loaded):
-            // Wait for the widget to load the default sources, then override the text
-            searchWidget.when(() => {
-                const sources = searchWidget.sources.toArray();
-                sources.forEach((source) => {
-                    source.placeholder = "Find a Coffee Shop (or any address)";
-                });
-                // Re-assign the modified sources array back to the widget
-                searchWidget.sources = sources;
             });
 
             // because the Add Record button takes up a lot of space, I placed the search widget within an expand widget
