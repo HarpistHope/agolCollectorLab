@@ -46,6 +46,17 @@
             background-color: #005a87;
         }
 
+        /* Using css to limit the search widget so it does not take up the entire screen when expanded*/
+        .esri-ui .esri-expand__content--expanded {
+            max-width: 300px !important; /* I use !important to override any default css rules */
+            width: 300px !important;
+        }
+
+        /* limit the height of the suggested addresses dropdown list */
+        .esri-search__suggestions-menu {
+            max-height: 400px !important; 
+        }
+
     </style>
 
     <!-- importing css and libraries for esri.js  -->
@@ -104,6 +115,7 @@
             // create search widget
             const searchWidget = new Search({
                 view: view,
+                allPlaceholder: "Find a Coffee Shop (or anywhere else)", 
                 placeholder: "Find a Coffee Shop (or anywhere else)" // adding custom placeholder text to the search widget
             });
 
