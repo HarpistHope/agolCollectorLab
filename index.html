@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="https://js.arcgis.com/4.26/esri/themes/light/main.css" />
     <script src="https://js.arcgis.com/4.26/"></script>
 
-    <!-- define css style -->
+    <!-- define custom css style -->
     <style>
         html,
-        body { /* adding mobile-first css viewport rules to the body/parent container */
+        body { /* adding mobile-first css viewport rules to the parent container (I think that's the body in this case?) */
             height: 100vh;
             width: 100vw;
             margin: 0;
@@ -61,7 +61,7 @@
     <!-- call the div 'viewDiv' -->
      <div id="viewDiv"></div>
 
-    <!-- loading the modules - same as labs 2 and 3, I moved the script to the body to prevent parsing errors upon page loading -->
+    <!-- loading the modules - same as labs 2 and 3, I moved the script to the body to make sure viewDiv is already found/rendered before the script calls it -->
      <script>
         require([
             "esri/config", 
