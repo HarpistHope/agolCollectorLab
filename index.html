@@ -91,7 +91,20 @@
 
             // define locate widget
             const locateBtn = new Locate({
-                view: view
+                view: view,
+                geolocationOptions: { // setting up timing failsafe
+                    enableHighAccuracy: true,
+                    timeout: 10000,
+                    maximumAge: 0
+                }
+            });
+
+            // Handle location errors gracefully per the rubric (Gemini helped with the function outline)
+            locateBtn.on("locate-error", (event) => {
+                console.error("Locate Widget Error:", event.error);
+                
+                // Provide an alert message
+                alert("Unable to find your location. Please check your phone's privacy settings or ensure your GPS signal is strong.");
             });
 
             // Add the locate widget to the top left corner of the view, below search and zoom widgets
@@ -127,6 +140,12 @@
 
             // add layer to the map
             map.add(layer);
+
+            // final failsafe verifies layer loads correctly or fails with an alert message
+            layer.load().catch((error) => {
+                console.error("FeatureLayer failed to load:", error);
+                alert("Notice: The survey data layer is temporarily unavailable. You can still add a record using the submission form above.");
+            });
 
         });
 
